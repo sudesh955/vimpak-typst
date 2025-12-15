@@ -14,7 +14,7 @@ default = ["console_error_panic_hook"]
 [dependencies]
 typst = "0.13"
 typst-svg = "0.13"
-typst-assets = { features = ["fonts"], version = "0.13.1" }
+typst-assets = { features = ["fonts"], version = "0.14.2" }
 wasm-bindgen = "0.2.84"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
