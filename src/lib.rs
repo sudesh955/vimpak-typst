@@ -12,6 +12,7 @@ use typst::{
     utils::LazyHash,
     Library,
 };
+use typstyle_core::{Config, Typstyle};
 use wasm_bindgen::prelude::*;
 
 use crate::fonts::get_fonts;
@@ -91,4 +92,25 @@ pub unsafe fn compile(source: String) -> Option<String> {
     let result = typst::compile(&world);
     let document = result.output.ok()?;
     Some(typst_svg::svg_merged(&document, Abs::zero()))
+}
+
+#[wasm_bindgen]
+pub unsafe fn format(src: String) -> String {
+    utils::set_panic_hook();
+    let config = Config::default();
+    let typstyle = Typstyle::new(config);
+    let source = Source::detached(src.clone());
+    let formatter = typstyle.format_source(source);
+    formatter.render().unwrap_or(src)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_should_format() {
+        let src = unsafe { format("$\na x^2 + b x + c         = 0\n$".into()) };
+        println!("{}", src)
+    }
 }
