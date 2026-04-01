@@ -7,12 +7,18 @@ WASM bindings for [Typst](https://typst.app/), a modern typesetting system.
 - **Compile**: Convert Typst markup to SVG output
 - **Format**: Format Typst source code using typstyle
 
+## Install
+
+```bash
+npm install @vimpak/typst
+```
+
 ## Usage
 
 ### JavaScript/TypeScript
 
 ```javascript
-import init, { compile, format } from "./pkg/vpk_typst.js";
+import init, { compile, format } from "@vimpak/typst";
 
 await init();
 
